@@ -1,0 +1,2 @@
+# static
+host static resources
