@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>
+embed test page
+</title>
+    <script>
+        var uetq = uetq || [];
+        uetq.push(["custom", { gv: 1000 }]);
+        uetq.push(["custom", { gv: 2000, gc: 'USD' }]);
+    </script>
+
+    <script>
+        var uetq = uetq || [];
+        uetq.push(["custom", { gv: 3000 }]);
+    </script>
+</head>
+
+<body>
+<script>
+(function (w, d, tag, scr) {
+    // Create 'uet' global array
+    w.uetq = w.uetq || [];
+
+    // Success callback for when the file has been downloaded
+    var initUET = function () {
+        /*
+           Any data that is required for initialization of the library.
+           This will typically include any fields that need to be sent with every G call
+		*/
+        var initData = {
+            adv: "43025", ti: "2097241", Tag: "MSFT_MMNMazdaQ3CX9_4", Sig: "4584cf52f0012f3e61e064a3f085f104", Ver: "1", EXT_Data: "atc0.VALUE0/atc1.VALUE1/atc2.VALUE2/atc.VALUE3",
+            debug: {
+                //CORS: false,
+                //postOnly: true
+            }
+        }
+
+        // Transforms the global uet queue, uetq, into 'uet' object
+        // Queued events are available through UTE object 'evq' property
+        w.uetq = new UET(initData);
+
+        // Tigger pageLoad event
+        w.uetq.push(["pageLoad"]);
+    };
+
+    /*
+       Add the script tag to the page and set up the listeners so that the
+       initialization function is called when the script has finished downloading.
+	 */
+    var n = d.createElement(tag);
+    n.src = scr;
+    n.async = 1;
+    n.onload = n.onreadystatechange = function () {
+        var rs = this.readyState;
+        if (!rs || rs === "loaded" || rs === "complete") {
+            initUET();
+            n.onload = n.onreadystatechange = null;
+        }
+    };
+
+    var s = d.getElementsByTagName(tag)[0];
+    s.parentNode.insertBefore(n, s);
+})(window, document, "script", "bat.js");
+</script>
+</body>
+</html>
